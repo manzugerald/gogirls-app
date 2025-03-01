@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+html, body {
+    @apply min-h-screen bg-white text-gray-800;
+}
+
+/* Main container background & shadow */
+.app {
+    @apply bg-[#e8dde0] shadow-xl shadow-gray-300 p-0 z-10 relative;
+  }
+/* e8dde0 */
+
+/* Custom Navbar Styles */
+.nav-link {
+    @apply text-white text-base md:text-base font-bold hover:text-black transition duration-300 hover:font-bold;
+}
+
+.nav-item {
+    @apply relative cursor-pointer;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    @apply absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-200 hidden group-hover:block;
+}
+
+.dropdown-item {
+    @apply px-4 py-2 hover:bg-gray-100 transition duration-300;
+}
+
+/* Button Styles */
+.btn-primary {
+    @apply bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition duration-300;
+}
+
+/* Responsive Image */
+.img-responsive {
+    @apply w-full h-auto object-cover;
+}
+
+/* Footer Styles */
+.footer {
+    @apply bg-white text-gray-600 text-center py-4 border-t border-gray-200;
+}
+
+/* Prevent overlap of content with fixed navbar */
+main {
+    @apply mt-0; /* Adjust this based on your navbar height */
+}
+
+
