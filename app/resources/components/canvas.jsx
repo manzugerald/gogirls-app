@@ -1,17 +1,33 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/solid';
 
+// Helper to format ISO 8601 duration (e.g., "PT4M33S" -> "4:33")
+const formatDuration = (isoDuration) => {
+  const match = isoDuration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+  const hours = match[1] ? parseInt(match[1]) : 0;
+  const minutes = match[2] ? parseInt(match[2]) : 0;
+  const seconds = match[3] ? parseInt(match[3]) : 0;
+  return `${hours ? hours + ':' : ''}${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+};
+
+// Helper to format date (e.g., "2023-10-01T12:00:00Z" -> "Oct 1, 2023")
+const formatDate = (isoDate) => {
+  return new Date(isoDate).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+};
+
 const Canvas = ({ selectedItem }) => {
-  // Sample image data for the gallery
   const galleryImages = [
     { id: 1, src: '/assets/images/banner9.png', alt: 'Gallery Image 1', title: 'Image 1', description: 'Lorem ipsum odor amet.' },
     { id: 2, src: '/assets/images/hero.png', alt: 'Gallery Image 2', title: 'Image 2', description: 'Lorem ipsum odor amet.' },
     { id: 3, src: '/assets/images/banner9.png', alt: 'Gallery Image 3', title: 'Image 3', description: 'Lorem ipsum odor amet.' },
   ];
 
-  // Sample PDF data for Reports
   const pdfFiles = [
     { id: 1, src: '/assets/pdfs/sample1.pdf', title: 'Report 1', description: 'GoGirls Annual Report 2024: Tech Highs and Lows.' },
     { id: 2, src: '/assets/pdfs/sample2.pdf', title: 'Report 2', description: 'Female Tech Engineers Report: The growth of Female Tech Engineers in South Sudan' },
@@ -20,28 +36,57 @@ const Canvas = ({ selectedItem }) => {
     { id: 5, src: '/assets/pdfs/sample5.pdf', title: 'Report 5', description: 'What next after LLMs: Big Tech insights after the LLMs' },
   ];
 
-  // Sample article data for Articles
   const articles = [
     {
       id: 1,
       title: 'Tech Trends 2024',
       description: 'A brief look at emerging tech.',
       image: '/assets/images/hero.png',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. This is a longer text to demonstrate how it flows below the image when the content exceeds the height of the image on the left. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. This is a longer text to demonstrate how it flows below the image when the content exceeds the height of the image on the left. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. This is a longer text to demonstrate how it flows below the image when the content exceeds the height of the image on the left. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. This is a longer text to demonstrate how it flows below the image when the content exceeds the height of the image on the left.'
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
     {
       id: 2,
       title: 'AI in Africa',
       description: 'AI’s impact on the continent.',
       image: '/assets/images/ai.jpg',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     },
   ];
 
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [isLoadingVideos, setIsLoadingVideos] = useState(false);
+  const [videoError, setVideoError] = useState(null);
   const [featuredImage, setFeaturedImage] = useState(galleryImages[0]);
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [selectedArticle, setSelectedArticle] = useState(null);
+
+  useEffect(() => {
+    if (selectedItem === 'Videos & OCRs') {
+      setIsLoadingVideos(true);
+      setVideoError(null);
+      const fetchVideos = async () => {
+        try {
+          const response = await fetch('/api/videos');
+          const text = await response.text();
+          console.log('Raw response from /api/videos:', text);
+          if (!response.ok) {
+            throw new Error(`Server returned ${response.status}: ${text}`);
+          }
+          const videoData = JSON.parse(text);
+          setVideos(videoData);
+          setSelectedVideo(videoData[0]);
+        } catch (error) {
+          console.error('Error fetching videos:', error);
+          setVideoError(error.message || 'Failed to load videos');
+        } finally {
+          setIsLoadingVideos(false);
+        }
+      };
+      fetchVideos();
+    }
+  }, [selectedItem]);
 
   const handleThumbnailClick = (image) => {
     setFeaturedImage(image);
@@ -64,6 +109,10 @@ const Canvas = ({ selectedItem }) => {
     setSelectedArticle(article);
   };
 
+  const handleVideoClick = (video) => {
+    setSelectedVideo(video);
+  };
+
   return (
     <div className="ml-[250px] p-5 h-screen bg-gray-100">
       <h2 className="text-xl font-semibold mb-4">
@@ -71,7 +120,84 @@ const Canvas = ({ selectedItem }) => {
       </h2>
       <div className="bg-white p-5 rounded-lg shadow-md h-[calc(100%-4rem)] overflow-auto">
         {selectedItem === 'Videos & OCRs' && (
-          <div className="p-4 bg-gray-200 rounded-md text-center">Videos & OCRs</div>
+          <div className="flex flex-col items-center">
+            {isLoadingVideos ? (
+              <div className="flex flex-col items-center w-full">
+                <div className="mb-5 flex justify-center">
+                  <div className="w-[600px] text-center">
+                    <div className="w-[600px] h-[400px] bg-gray-300 rounded-lg animate-pulse"></div>
+                    <div className="mt-3">
+                      <div className="w-3/4 h-6 bg-gray-300 rounded mx-auto animate-pulse"></div>
+                      <div className="w-1/2 h-4 bg-gray-300 rounded mx-auto mt-2 animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-4 justify-center">
+                  {Array(6).fill(0).map((_, index) => (
+                    <div
+                      key={index}
+                      className="w-[100px] bg-white rounded-md shadow-sm text-center"
+                    >
+                      <div className="w-[100px] h-[75px] bg-gray-300 rounded-t-md animate-pulse"></div>
+                      <div className="w-3/4 h-4 bg-gray-300 rounded mx-auto my-1 animate-pulse"></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : videoError ? (
+              <p className="text-red-600">{videoError}</p>
+            ) : selectedVideo ? (
+              <>
+                <div className="mb-5 flex justify-center">
+                  <div className="w-[600px] text-center">
+                    <iframe
+                      width="400"
+                      height="250"
+                      src={`https://www.youtube.com/embed/${selectedVideo.id}?rel=0`}
+                      title={selectedVideo.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="rounded-lg mx-auto block"
+                    />
+                    <div className="mt-3">
+                      <p className="text-lg font-bold">{selectedVideo.title}</p>
+                      {/* <p className="text-sm text-gray-600 leading-relaxed">{selectedVideo.description}</p> */}
+                      <div className="mt-2 text-sm text-gray-500">
+                        <p>Published: {formatDate(selectedVideo.publishedAt)}</p>
+                        {/* <p>Views: {selectedVideo.viewCount}</p> */}
+                        {/* <p>Likes: {selectedVideo.likeCount}</p> */}
+                        <p>Duration: {formatDuration(selectedVideo.duration)}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-4 justify-center">
+                  {videos.map((video) => (
+                    <div
+                      key={video.id}
+                      className={`w-[100px] bg-white rounded-md shadow-sm text-center cursor-pointer transition-all duration-200 hover:bg-[#9f004d] ${
+                        video.id === selectedVideo.id ? 'border-2 border-blue-500' : ''
+                      }`}
+                      onClick={() => handleVideoClick(video)}
+                    >
+                      <Image
+                        src={video.thumbnail}
+                        alt={video.title}
+                        width={100}
+                        height={75}
+                        className="object-cover rounded-t-md"
+                      />
+                      <p className="text-xs my-1 truncate">{video.title}</p>
+                      <p className="text-xs text-gray-500">{formatDuration(video.duration)}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <p className="text-gray-600">No videos loaded.</p>
+            )}
+          </div>
         )}
         {selectedItem === 'Reports' && (
           selectedPdf ? (
@@ -190,7 +316,7 @@ const Canvas = ({ selectedItem }) => {
                 <div
                   key={image.id}
                   className={`w-[100px] bg-white rounded-md shadow-sm text-center cursor-pointer transition-all duration-200 hover:bg-[#9f004d] ${
-                    image.id === featuredImage.id ? 'border-2 border-blue-500' : ''
+                    image.id === selectedVideo?.id ? 'border-2 border-blue-500' : ''
                   }`}
                   onClick={() => handleThumbnailClick(image)}
                 >
@@ -199,9 +325,9 @@ const Canvas = ({ selectedItem }) => {
                     alt={image.alt}
                     width={100}
                     height={75}
-                    className="object-cover"
+                    className="object-cover rounded-t-md"
                   />
-                  <p className="text-xs my-1">{image.title}</p>
+                  <p className="text-xs my-1 truncate">{image.title}</p>
                 </div>
               ))}
             </div>

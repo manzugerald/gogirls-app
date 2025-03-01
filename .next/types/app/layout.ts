@@ -1,4 +1,4 @@
-// File: D:\GitHub\gogirls\app\layout.jsx
+// File: E:\gogirls-app\app\layout.jsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
