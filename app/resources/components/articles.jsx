@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
+import { ArrowDownTrayIcon } from '@heroicons/react/24/solid';
 
-const Reports = () => {
+const Articles = () => {
   const pdfFiles = [
     { id: 1, src: '/assets/pdfs/sample1.pdf', title: 'Report 1' },
     { id: 2, src: '/assets/pdfs/sample2.pdf', title: 'Report 2' },
@@ -35,4 +36,4 @@ const Reports = () => {
   );
 };
 
-export default Reports;
+export default Articles;

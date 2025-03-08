@@ -1,3 +1,4 @@
+import Breadcrumb from '@components/breadcrumb';
 import Footer from '@components/footer';
 import Hero from '@components/hero';
 import Navbar from '@components/navbar';
@@ -16,7 +17,7 @@ const RootLayout = ({ children }) => {
       <body>
         <main className="app bg-[#e8dde0] min-h-screen flex flex-col">
           <Navbar />
-          
+          {/* <Breadcrumb /> */}
           <div className="app bg-[#e8dde0] min-h-screen p-8 z-10 relative">
             {children}
           </div>

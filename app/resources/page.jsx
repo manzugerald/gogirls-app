@@ -5,6 +5,8 @@ import Videos from './components/Videos';
 import Reports from './components/Reports';
 import Articles from './components/Articles';
 import Gallery from './components/Gallery';
+import Hero from '@components/hero';
+import Breadcrumb from '@components/breadcrumb';
 
 export default function ResourcesPage() {
   const searchParams = useSearchParams();
@@ -12,15 +14,14 @@ export default function ResourcesPage() {
   const [selectedTab, setSelectedTab] = useState(initialTab);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Update selectedTab when URL parameter changes
   useEffect(() => {
     const type = searchParams.get('type');
     if (type && ['Videos', 'Reports', 'Articles', 'Gallery'].includes(type)) {
       setSelectedTab(type);
     } else {
-      setSelectedTab('Videos'); // Default to Videos if invalid type
+      setSelectedTab('Videos');
     }
-    setIsLoading(false); // Mark loading as complete after params are processed
+    setIsLoading(false);
   }, [searchParams]);
 
   const renderComponent = () => {
@@ -38,13 +39,17 @@ export default function ResourcesPage() {
   }
 
   return (
-    <div className="pt-20 px-5 min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-end">
+    <div className="min-h-screen bg-gray-100 p-6 mt-10">
+      {/* <Hero /> */}
+      <Breadcrumb />
+      {/* Header Section */}
+      <div className="max-w-4xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Resources</h1>
           <select
             onChange={(e) => setSelectedTab(e.target.value)}
             value={selectedTab}
-            className="mb-4 p-2 border rounded-md bg-white text-gray-800 w-full sm:w-64"
+            className="p-2 border rounded-md bg-white text-gray-800 w-full sm:w-64"
           >
             <option value="Videos">Videos</option>
             <option value="Reports">Reports</option>
@@ -52,7 +57,11 @@ export default function ResourcesPage() {
             <option value="Gallery">Gallery</option>
           </select>
         </div>
-        {renderComponent()}
+
+        {/* Component Content */}
+        <div className="w-full">
+          {renderComponent()}
+        </div>
       </div>
     </div>
   );
