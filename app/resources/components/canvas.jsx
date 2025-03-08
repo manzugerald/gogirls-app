@@ -151,7 +151,7 @@ const Canvas = ({ selectedItem }) => {
                 <div className="mb-5 flex justify-center">
                   <div className="w-[600px] text-center">
                     <iframe
-                      width="400"
+                      width="600"
                       height="250"
                       src={`https://www.youtube.com/embed/${selectedVideo.id}?rel=0`}
                       title={selectedVideo.title}

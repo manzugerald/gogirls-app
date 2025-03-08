@@ -1,4 +1,6 @@
 {
   "/api/videos/route": "app/api/videos/route.js",
-  "/resources/page": "app/resources/page.js"
+  "/page": "app/page.js",
+  "/resources/page": "app/resources/page.js",
+  "/projects/page": "app/projects/page.js"
 }

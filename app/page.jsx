@@ -1,43 +1,35 @@
-import Footer from "@components/footer"
-import Hero from "@components/hero"
-import ImageTextCard from "@components/imagecard"
-import NavBar from "@components/navbar"
-import TextButtonComponent from "@components/textButton"
-import TextImageLeft from "@components/textImageLeft"
-import TextImageRight from "@components/textImageRight"
-import Reach from "@components/reach"
-import ContactForm from "@components/contact"
-import VisionMissionFocus from "@components/visionMissionFocus"
-import PartnerLogos from "@components/partnerLogos"
-import HeroVideo from "@components/heroVideo"
+import NavBar from "@components/navbar";
+import HeroVideo from "@components/heroVideo";
+import Reach from "@components/reach";
+import TextImageLeft from "@components/textImageLeft";
+import VisionMissionFocus from "@components/visionMissionFocus";
+import ContactForm from "@components/contact";
+import PartnerLogos from "@components/partnerLogos";
 
-const Home = ({children}) => {
+const Home = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* NavBar spans across the full width */}
+      {/* NavBar and top-level components */}
       <div className="w-full">
         <NavBar />
         <HeroVideo />
-        {/* <Hero /> */}
         <Reach />
         <TextImageLeft />
         <VisionMissionFocus />
         <ContactForm />
       </div>
-    {/* Main content area */}
-    <main className="bg-white-100 flex-grow"> 
-        {/* Container for ImageTextCards */}
-        
-        {/* Placeholder for dynamic content */}
+
+      {/* Main content area */}
+      <main className="bg-white-100 flex-grow">
         {children}
       </main>
-      {/* Footer spans across the full width */}
+
+      {/* Footer section */}
       <div className="w-full">
         <PartnerLogos />
-        <Footer />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
