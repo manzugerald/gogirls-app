@@ -40,10 +40,8 @@ export default function ResourcesPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 mt-10">
-      {/* <Hero /> */}
       <Breadcrumb />
-      {/* Header Section */}
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl w-full mx-auto px-4 md:px-8 lg:px-12">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Resources</h1>
           <select
@@ -58,7 +56,6 @@ export default function ResourcesPage() {
           </select>
         </div>
 
-        {/* Component Content */}
         <div className="w-full">
           {renderComponent()}
         </div>

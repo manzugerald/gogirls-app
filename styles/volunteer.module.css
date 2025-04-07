@@ -1,0 +1,163 @@
+/* app/getinvolved/components/volunteer.module.css */
+.volunteerSection {
+  padding: 60px 20px;
+  background-color: #f5f7fa; /* Light gray background */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+}
+
+.imageWrapper {
+  flex: 1;
+  min-width: 300px;
+}
+
+.volunteerImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.textContent {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #1a3c6d; /* Dark blue */
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #2d5ba8; /* Medium blue */
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.paragraph {
+  font-size: 1rem;
+  color: #333; /* Dark gray */
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.volunteerButton {
+  background-color: #9f009f; /* Vibrant purple */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.volunteerButton:hover {
+  background-color: #7a007a; /* Darker purple on hover */
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modalTitle {
+  font-size: 1.8rem;
+  color: #1a3c6d;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formLabel {
+  font-size: 1rem;
+  color: #333;
+}
+
+.formInput {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding doesn’t affect width */
+}
+
+/* Style for select and date inputs to match text inputs */
+.formInput[type="date"],
+.formInput select {
+  appearance: none; /* Removes default browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" fill="none" stroke="%23333" stroke-width="2"><polyline points="0,0 6,6 12,0"/></svg>') no-repeat right 10px center / 12px; /* Custom dropdown arrow */
+  padding-right: 30px; /* Space for the arrow */
+}
+
+.formInput[type="date"] {
+  background: none; /* Date inputs don’t need the arrow */
+}
+
+.formButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.submitButton {
+  background-color: #9f009f; /* Matching purple */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #7a007a; /* Darker purple on hover */
+}
+
+.closeButton {
+  background-color: #ccc;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: #b3b3b3;
+}

@@ -1,9 +1,11 @@
+import '@styles/globals.css';
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 import Breadcrumb from '@components/breadcrumb';
 import Footer from '@components/footer';
 import Hero from '@components/hero';
 import Navbar from '@components/navbar';
 import PartnerLogos from '@components/partnerLogos';
-import '@styles/globals.css';
+
 
 export const metadata = {
   title: 'GoGirls ICT Initiative',

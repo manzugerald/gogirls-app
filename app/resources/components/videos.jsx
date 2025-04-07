@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-const VIDEOS_PER_PAGE = 2; // Only two videos per page (one row, two columns)
+const VIDEOS_PER_PAGE = 2;
 
 const Videos = () => {
   const [videos, setVideos] = useState([]);
@@ -16,19 +16,19 @@ const Videos = () => {
         const response = await fetch('/api/videos');
         const data = await response.json();
 
-        console.log('Fetched data:', data); // Debugging log
+        console.log('Fetched data:', data);
 
         if (Array.isArray(data)) {
           setVideos(data);
-          setSelectedVideo(data[0] || null); // Set first video as selected
+          setSelectedVideo(data[0] || null);
         } else {
           console.error('Unexpected response format:', data);
-          setVideos([]); // Fallback to empty array
+          setVideos([]);
           setSelectedVideo(null);
         }
       } catch (error) {
         console.error('Failed to load videos:', error);
-        setVideos([]); // Fallback to empty array on error
+        setVideos([]);
         setSelectedVideo(null);
       } finally {
         setIsLoading(false);
@@ -39,7 +39,6 @@ const Videos = () => {
 
   if (isLoading) return <div className="p-5 text-center">Loading videos...</div>;
 
-  // Pagination logic with array checks
   const totalPages = Math.ceil((Array.isArray(videos) ? videos.length : 0) / VIDEOS_PER_PAGE);
   const startIndex = (currentPage - 1) * VIDEOS_PER_PAGE;
   const paginatedVideos = Array.isArray(videos) ? videos.slice(startIndex, startIndex + VIDEOS_PER_PAGE) : [];
@@ -49,20 +48,18 @@ const Videos = () => {
   };
 
   return (
-    <div className="w-full p-5 max-w-3xl mx-auto"> {/* Adjust the max-w-3xl here for width control */}
+    <div className="w-full p-5 mx-auto"> 
       {videos.length === 0 ? (
         <p className="text-center">No videos found</p>
       ) : (
         <>
-          {/* Selected Video Section */}
           {selectedVideo && (
-            <div className="flex justify-center mb-8">
-              <div className="text-center max-w-xl w-full bg-white rounded-md shadow-md">
-                {/* Upper Part: Video and Controls */}
+            <div className="flex justify-center mb-8 w-full">
+              <div className="text-center w-full bg-white rounded-md shadow-md">
                 <div className="w-full">
                   <iframe
                     width="100%"
-                    height="350"
+                    height="500"
                     src={`https://www.youtube.com/embed/${selectedVideo.id}`}
                     title={selectedVideo.title || 'No title available'}
                     frameBorder="0"
@@ -71,7 +68,6 @@ const Videos = () => {
                     className="rounded-t-md mx-auto"
                   />
                 </div>
-                {/* Lower Part: Title and Views */}
                 <div className="bg-pink-900 text-white p-3 rounded-b-md">
                   <h3 className="text-xl font-bold">{selectedVideo.title || 'No title available'}</h3>
                   <p className="text-sm mt-1">Views: {selectedVideo.viewCount || '0'}</p>
@@ -80,25 +76,22 @@ const Videos = () => {
             </div>
           )}
 
-          {/* Video Thumbnails (Grid Layout) */}
-          <div className="max-w-xl w-full mx-auto grid grid-cols-2 gap-4 mb-8">
+          <div className="w-full grid grid-cols-2 gap-4 mb-8">
             {paginatedVideos.map((video) => (
               <div
                 key={video.id}
-                className="relative bg-pink-900 rounded-md shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                className="relative bg-pink-900 rounded-md shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer w-full"
                 onClick={() => setSelectedVideo(video)}
               >
-                {/* Upper Part: Thumbnail */}
-                <div className="w-full h-32 bg-pink-900 flex items-center justify-center">
+                <div className="w-full h-48 flex items-center justify-center">
                   <Image
                     src={video.thumbnail || '/default-thumbnail.jpg'}
                     alt={video.title || 'No title available'}
-                    width={160}
-                    height={90}
-                    className="rounded-t-md w-full h-full object-cover"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-t-md"
                   />
                 </div>
-                {/* Lower Part: Title and Views */}
                 <div className="bg-pink-900 text-white p-2 rounded-b-md">
                   <h2 className="text-sm font-semibold break-words">{video.title || 'No title available'}</h2>
                   <p className="text-xs mt-1">Views: {video.viewCount || '0'}</p>
@@ -107,7 +100,6 @@ const Videos = () => {
             ))}
           </div>
 
-          {/* Pagination Controls */}
           {videos.length > VIDEOS_PER_PAGE && (
             <div className="flex justify-center gap-3">
               <button
@@ -139,14 +131,6 @@ const Videos = () => {
           )}
         </>
       )}
-
-      {/* Inline CSS for fold effect */}
-      <style jsx>{`
-        .fold-effect {
-          clip-path: polygon(0 0, 100% 0, 0 100%);
-          z-index: 10;
-        }
-      `}</style>
     </div>
   );
 };

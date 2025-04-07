@@ -1,0 +1,80 @@
+/* app/events/components/registrationForm.module.css */
+.modalContent {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modalTitle {
+    font-size: 1.8rem;
+    color: #1a3c6d; /* Dark blue */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .signupForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .formLabel {
+    font-size: 1rem;
+    color: #333; /* Dark gray */
+  }
+  
+  .formInput {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn’t affect width */
+  }
+  
+  /* Style for select and number inputs to match text inputs */
+  .formInput[type="number"],
+  .formInput select {
+    appearance: none; /* Removes default browser styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" fill="none" stroke="%23333" stroke-width="2"><polyline points="0,0 6,6 12,0"/></svg>') no-repeat right 10px center / 12px; /* Custom dropdown arrow */
+    padding-right: 30px; /* Space for the arrow */
+  }
+  
+  .formButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .submitButton {
+    background-color: #9f009f; /* Vibrant purple */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: #7a007a; /* Darker purple on hover */
+  }
+  
+  .closeButton {
+    background-color: #ccc;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .closeButton:hover {
+    background-color: #b3b3b3;
+  }

@@ -10,16 +10,29 @@ html, body {
 /* Main container background & shadow */
 .app {
     @apply bg-[#e8dde0] shadow-xl shadow-gray-300 p-0 z-10 relative;
-  }
-/* e8dde0 */
+}
 
 /* Custom Navbar Styles */
 .nav-link {
-    @apply text-white text-base md:text-base font-bold hover:text-black transition duration-300 hover:font-bold;
+    @apply text-white text-lg md:text-lg font-bold hover:text-black transition duration-300 hover:font-bold;
 }
 
+/* Active Nav Link */
+.nav-link.active {
+    @apply text-black font-bold; /* Active link will be black with bold font */
+}
+
+.donate.nav-link.active {
+    @apply text-white hover:text-black;
+}
+
+/* Additional Styles for Other Elements */
 .nav-item {
     @apply relative cursor-pointer;
+}
+
+.donate {
+    @apply text-white hover:text-black hover:bg-white;
 }
 
 /* Dropdown Menu */
@@ -50,5 +63,3 @@ html, body {
 main {
     @apply mt-0; /* Adjust this based on your navbar height */
 }
-
-

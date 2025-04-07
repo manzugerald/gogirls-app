@@ -1,0 +1,166 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./styles/volunteer.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
+/* app/getinvolved/components/volunteer.module.css */
+.volunteer_volunteerSection__uHXRg {
+  padding: 60px 20px;
+  background-color: #f5f7fa; /* Light gray background */
+}
+
+.volunteer_container__6jR7s {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+}
+
+.volunteer_imageWrapper__UEwfI {
+  flex: 1;
+  min-width: 300px;
+}
+
+.volunteer_volunteerImage__mwCDi {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.volunteer_textContent__2HHAg {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+}
+
+.volunteer_title___Xblw {
+  font-size: 2.5rem;
+  color: #1a3c6d; /* Dark blue */
+  margin-bottom: 20px;
+}
+
+.volunteer_subtitle__1__Pk {
+  font-size: 1.5rem;
+  color: #2d5ba8; /* Medium blue */
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.volunteer_paragraph__6pTte {
+  font-size: 1rem;
+  color: #333; /* Dark gray */
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.volunteer_volunteerButton__Ol_SD {
+  background-color: #9f009f; /* Vibrant purple */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.volunteer_volunteerButton__Ol_SD:hover {
+  background-color: #7a007a; /* Darker purple on hover */
+}
+
+/* Modal Styles */
+.volunteer_modalOverlay__6he81 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.volunteer_modalContent__L0J0D {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.volunteer_modalTitle__dnXg9 {
+  font-size: 1.8rem;
+  color: #1a3c6d;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.volunteer_signupForm__r1fYi {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.volunteer_formLabel__rXLK4 {
+  font-size: 1rem;
+  color: #333;
+}
+
+.volunteer_formInput__58qGo {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding doesn’t affect width */
+}
+
+/* Style for select and date inputs to match text inputs */
+.volunteer_formInput__58qGo[type="date"],
+.volunteer_formInput__58qGo select {
+  appearance: none; /* Removes default browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" fill="none" stroke="%23333" stroke-width="2"><polyline points="0,0 6,6 12,0"/></svg>') no-repeat right 10px center / 12px; /* Custom dropdown arrow */
+  padding-right: 30px; /* Space for the arrow */
+}
+
+.volunteer_formInput__58qGo[type="date"] {
+  background: none; /* Date inputs don’t need the arrow */
+}
+
+.volunteer_formButtons__mjSdn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.volunteer_submitButton__mQOmt {
+  background-color: #9f009f; /* Matching purple */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.volunteer_submitButton__mQOmt:hover {
+  background-color: #7a007a; /* Darker purple on hover */
+}
+
+.volunteer_closeButton__NuBev {
+  background-color: #ccc;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.volunteer_closeButton__NuBev:hover {
+  background-color: #b3b3b3;
+}

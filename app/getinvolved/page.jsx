@@ -1,15 +1,24 @@
-import Footer from '@components/footer'
-import Hero from '@components/hero'
-import React from 'react'
+import Hero from "@components/hero";
+import NavBar from "@components/NavBar";
+import React from "react";
+import Breadcrumb from "@components/breadcrumb";
+import Volunteer from "./components/volunteer";
 
-const page = () => {
+const Page = () => {
   return (
-    <div>
-      Under Dev: Content will go here
+    <div className="h-auto flex flex-col items-center">
+      {/* Full-width Navbar */}
+      <NavBar />
       <Hero />
-      <Footer />
-    </div>
-  )
-}
 
-export default page
+      {/* Main Content */}
+      <div className="w-full max-w-7xl px-4 sm:px-8 md:px-16 py-8 flex flex-col items-center">
+        <Breadcrumb />
+        <h1 className="text-2xl text-[#9f004d] font-bold sm:text-3xl md:text-4xl mb-8 text-center">Volunteer with us</h1>
+        <Volunteer />
+      </div>
+    </div>
+  );
+};
+
+export default Page;
